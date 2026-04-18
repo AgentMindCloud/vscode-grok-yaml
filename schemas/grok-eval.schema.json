@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/grok-eval.schema.json",
+  "title": "GrokInstall Eval",
+  "description": "Declares an evaluation suite — dataset, rubric, and target agent or model.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "type": "string", "const": "grokinstall.dev/v1" },
+    "kind": { "type": "string", "const": "Eval" },
+    "metadata": { "$ref": "#/definitions/Metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["target", "dataset"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "target": {
+          "type": "object",
+          "properties": {
+            "agent": { "type": "string" },
+            "model": { "type": "string" },
+            "prompt": { "type": "string" }
+          }
+        },
+        "dataset": { "type": "string", "description": "Dataset ref." },
+        "rubric": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "type"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["exact-match", "rouge", "llm-judge", "regex", "custom"] },
+              "weight": { "type": "number", "minimum": 0 },
+              "expression": { "type": "string" }
+            }
+          }
+        },
+        "passThreshold": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}$" },
+        "namespace": { "type": "string" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } },
+        "annotations": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

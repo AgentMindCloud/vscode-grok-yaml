@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/grok-policy.schema.json",
+  "title": "GrokInstall Policy",
+  "description": "Guardrail / safety policy applied to agents, tools, or workflows.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "type": "string", "const": "grokinstall.dev/v1" },
+    "kind": { "type": "string", "const": "Policy" },
+    "metadata": { "$ref": "#/definitions/Metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["rules"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "appliesTo": {
+          "type": "object",
+          "properties": {
+            "agents": { "type": "array", "items": { "type": "string" } },
+            "tools": { "type": "array", "items": { "type": "string" } },
+            "workflows": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "action"],
+            "properties": {
+              "id": { "type": "string" },
+              "action": { "type": "string", "enum": ["allow", "deny", "require-approval", "redact"] },
+              "match": { "type": "string", "description": "Expression or pattern to match." },
+              "severity": { "type": "string", "enum": ["info", "warning", "error"] }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}$" },
+        "namespace": { "type": "string" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } },
+        "annotations": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

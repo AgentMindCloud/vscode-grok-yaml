@@ -1,0 +1,90 @@
+{
+  "version": "0.1.0",
+  "source": "https://github.com/AgentMindCloud/grok-yaml-standards",
+  "schemas": [
+    {
+      "id": "grok-agent",
+      "kind": "Agent",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-agent.schema.json",
+      "fileMatch": ["**/grok-agent*.yaml", "**/grok-agent*.yml", "**/agents/*.yaml", "**/agents/*.yml"]
+    },
+    {
+      "id": "grok-workflow",
+      "kind": "Workflow",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-workflow.schema.json",
+      "fileMatch": ["**/grok-workflow*.yaml", "**/grok-workflow*.yml", "**/workflows/*.yaml", "**/workflows/*.yml"]
+    },
+    {
+      "id": "grok-tool",
+      "kind": "Tool",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-tool.schema.json",
+      "fileMatch": ["**/grok-tool*.yaml", "**/grok-tool*.yml", "**/tools/*.yaml", "**/tools/*.yml"]
+    },
+    {
+      "id": "grok-prompt",
+      "kind": "Prompt",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-prompt.schema.json",
+      "fileMatch": ["**/grok-prompt*.yaml", "**/grok-prompt*.yml", "**/prompts/*.yaml", "**/prompts/*.yml"]
+    },
+    {
+      "id": "grok-model",
+      "kind": "Model",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-model.schema.json",
+      "fileMatch": ["**/grok-model*.yaml", "**/grok-model*.yml", "**/models/*.yaml", "**/models/*.yml"]
+    },
+    {
+      "id": "grok-dataset",
+      "kind": "Dataset",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-dataset.schema.json",
+      "fileMatch": ["**/grok-dataset*.yaml", "**/grok-dataset*.yml", "**/datasets/*.yaml", "**/datasets/*.yml"]
+    },
+    {
+      "id": "grok-eval",
+      "kind": "Eval",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-eval.schema.json",
+      "fileMatch": ["**/grok-eval*.yaml", "**/grok-eval*.yml", "**/evals/*.yaml", "**/evals/*.yml"]
+    },
+    {
+      "id": "grok-deploy",
+      "kind": "Deploy",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-deploy.schema.json",
+      "fileMatch": ["**/grok-deploy*.yaml", "**/grok-deploy*.yml", "**/deploys/*.yaml", "**/deploys/*.yml"]
+    },
+    {
+      "id": "grok-secret",
+      "kind": "Secret",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-secret.schema.json",
+      "fileMatch": ["**/grok-secret*.yaml", "**/grok-secret*.yml", "**/secrets/*.yaml", "**/secrets/*.yml"]
+    },
+    {
+      "id": "grok-policy",
+      "kind": "Policy",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-policy.schema.json",
+      "fileMatch": ["**/grok-policy*.yaml", "**/grok-policy*.yml", "**/policies/*.yaml", "**/policies/*.yml"]
+    },
+    {
+      "id": "grok-telemetry",
+      "kind": "Telemetry",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-telemetry.schema.json",
+      "fileMatch": ["**/grok-telemetry*.yaml", "**/grok-telemetry*.yml", "**/telemetry/*.yaml", "**/telemetry/*.yml"]
+    },
+    {
+      "id": "grok-install",
+      "kind": "Install",
+      "apiVersion": "grokinstall.dev/v1",
+      "file": "grok-install.schema.json",
+      "fileMatch": ["**/grok-install*.yaml", "**/grok-install*.yml", "**/install/*.yaml", "**/install/*.yml"]
+    }
+  ]
+}

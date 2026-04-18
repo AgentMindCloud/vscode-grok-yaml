@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/grok-model.schema.json",
+  "title": "GrokInstall Model",
+  "description": "Model registration entry — identifier, provider, and defaults.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "type": "string", "const": "grokinstall.dev/v1" },
+    "kind": { "type": "string", "const": "Model" },
+    "metadata": { "$ref": "#/definitions/Metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["provider", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "provider": { "type": "string", "enum": ["xai", "openai", "anthropic", "local", "custom"] },
+        "id": { "type": "string", "description": "Provider-side model identifier." },
+        "contextWindow": { "type": "integer", "minimum": 1 },
+        "defaultTemperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["text", "vision", "tool-use", "reasoning"] }
+        },
+        "pricing": {
+          "type": "object",
+          "properties": {
+            "inputPer1k": { "type": "number", "minimum": 0 },
+            "outputPer1k": { "type": "number", "minimum": 0 },
+            "currency": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}$" },
+        "namespace": { "type": "string" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } },
+        "annotations": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

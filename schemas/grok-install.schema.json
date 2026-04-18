@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/grok-install.schema.json",
+  "title": "GrokInstall Install Manifest",
+  "description": "Install manifest — root descriptor that the grok-install CLI consumes.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "type": "string", "const": "grokinstall.dev/v1" },
+    "kind": { "type": "string", "const": "Install" },
+    "metadata": { "$ref": "#/definitions/Metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["steps"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "requires": {
+          "type": "object",
+          "properties": {
+            "grokInstall": { "type": "string", "description": "Semver range, e.g. `>=0.3.0`." },
+            "node": { "type": "string" },
+            "python": { "type": "string" }
+          }
+        },
+        "env": { "type": "object", "additionalProperties": { "type": "string" } },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": { "type": "string" },
+              "description": { "type": "string" },
+              "run": { "type": "string", "description": "Shell command to execute. Piped-curl-to-shell is flagged by the safety scanner." },
+              "install": { "type": "string", "description": "Package or reference to install." },
+              "apply": { "type": "string", "description": "Path to a GrokInstall YAML file to apply." },
+              "if": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}$" },
+        "namespace": { "type": "string" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } },
+        "annotations": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

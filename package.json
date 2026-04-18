@@ -1,0 +1,193 @@
+{
+  "name": "vscode-grok-yaml",
+  "displayName": "GrokInstall YAML",
+  "description": "Full IntelliSense, live schema validation, and safety-scanner diagnostics for the GrokInstall ecosystem. Built for Grok on X.",
+  "version": "0.1.0",
+  "publisher": "AgentMindCloud",
+  "license": "Apache-2.0",
+  "author": "AgentMindCloud",
+  "homepage": "https://grokinstall.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml/issues"
+  },
+  "galleryBanner": {
+    "color": "#0A0A0A",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.90.0",
+    "node": ">=20.0.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "grok",
+    "grokinstall",
+    "yaml",
+    "schema",
+    "agents",
+    "ai",
+    "xai"
+  ],
+  "main": "./dist/extension.js",
+  "extensionDependencies": [
+    "redhat.vscode-yaml"
+  ],
+  "activationEvents": [
+    "onLanguage:yaml",
+    "workspaceContains:**/grok-*.yaml",
+    "workspaceContains:**/grok-*.yml",
+    "workspaceContains:**/.grok/**/*.yaml",
+    "workspaceContains:**/.grok/**/*.yml"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "grokYaml.showOutput",
+        "title": "Show Scanner Output",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.rescan",
+        "title": "Rescan Workspace",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.refreshSchemas",
+        "title": "Refresh Schemas from Remote",
+        "category": "GrokInstall"
+      }
+    ],
+    "colors": [
+      {
+        "id": "grokYaml.statusClean",
+        "description": "Status bar color when no issues are found.",
+        "defaults": {
+          "dark": "#00FF9D",
+          "light": "#00FF9D",
+          "highContrast": "#00FF9D"
+        }
+      },
+      {
+        "id": "grokYaml.statusScanning",
+        "description": "Status bar color while the scanner is running.",
+        "defaults": {
+          "dark": "#00F0FF",
+          "light": "#00F0FF",
+          "highContrast": "#00F0FF"
+        }
+      },
+      {
+        "id": "grokYaml.statusIssues",
+        "description": "Status bar color when the scanner reports issues or errors.",
+        "defaults": {
+          "dark": "#FF2D55",
+          "light": "#FF2D55",
+          "highContrast": "#FF2D55"
+        }
+      }
+    ],
+    "configuration": {
+      "title": "GrokInstall YAML",
+      "properties": {
+        "grokYaml.schemas.source": {
+          "type": "string",
+          "enum": ["bundled", "remote", "auto"],
+          "enumDescriptions": [
+            "Use only the schemas shipped inside the extension VSIX.",
+            "Fetch the schemas from the remote grok-yaml-standards repository.",
+            "Use remote schemas when a refresh has succeeded; otherwise fall back to bundled."
+          ],
+          "default": "auto"
+        },
+        "grokYaml.schemas.remoteBaseUrl": {
+          "type": "string",
+          "default": "https://raw.githubusercontent.com/AgentMindCloud/grok-yaml-standards/main",
+          "description": "Base URL used when refreshing schemas from the grok-yaml-standards repository."
+        },
+        "grokYaml.scanner.mode": {
+          "type": "string",
+          "enum": ["cli", "library", "auto"],
+          "enumDescriptions": [
+            "Always spawn the grok-install CLI as a subprocess.",
+            "Always use the bundled grok-install-cli scanner library.",
+            "Prefer the CLI; fall back to the library if the CLI is unavailable."
+          ],
+          "default": "auto"
+        },
+        "grokYaml.scanner.cliPath": {
+          "type": "string",
+          "default": "grok-install",
+          "description": "Path or command used to invoke the grok-install CLI."
+        },
+        "grokYaml.scanner.runOn": {
+          "type": "string",
+          "enum": ["change", "save"],
+          "enumDescriptions": [
+            "Re-scan the document while the user is typing (debounced).",
+            "Re-scan only when the document is saved."
+          ],
+          "default": "change"
+        },
+        "grokYaml.scanner.debounceMs": {
+          "type": "number",
+          "default": 400,
+          "minimum": 0,
+          "maximum": 5000,
+          "description": "Debounce interval for change-driven scans, in milliseconds."
+        },
+        "grokYaml.fileMatch.globs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [
+            "**/grok-*.yaml",
+            "**/grok-*.yml",
+            "**/.grok/**/*.yaml",
+            "**/.grok/**/*.yml"
+          ],
+          "description": "Glob patterns that identify GrokInstall YAML documents by file name."
+        },
+        "grokYaml.fileMatch.contentSniff": {
+          "type": "boolean",
+          "default": true,
+          "description": "Also classify documents whose contents begin with `apiVersion: grokinstall.dev/...` and declare a known `kind:`."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.config.mjs",
+    "watch": "node esbuild.config.mjs --watch",
+    "compile-tests": "tsc -p ./ --outDir out",
+    "pretest": "npm run compile-tests && npm run build",
+    "test": "node ./out/test/runTest.js",
+    "lint": "eslint src --ext ts",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "yaml": "2.6.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "10.0.7",
+    "@types/node": "20.12.12",
+    "@types/vscode": "1.90.0",
+    "@typescript-eslint/eslint-plugin": "8.11.0",
+    "@typescript-eslint/parser": "8.11.0",
+    "@vscode/test-electron": "2.4.1",
+    "@vscode/vsce": "3.2.1",
+    "esbuild": "0.24.0",
+    "eslint": "8.57.1",
+    "mocha": "10.7.3",
+    "prettier": "3.3.3",
+    "typescript": "5.6.3"
+  }
+}

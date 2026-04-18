@@ -1,0 +1,15 @@
+apiVersion: grokinstall.dev/v1
+kind: Agent
+metadata:
+  name: demo-agent
+  labels:
+    tier: dev
+spec:
+  model: grok-4
+  description: Demo agent used by the extension test suite.
+  instructions: You are a helpful assistant. Keep answers short.
+  tools:
+    - search
+    - calculator
+  temperature: 0.7
+  maxTokens: 1024

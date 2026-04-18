@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/grok-agent.schema.json",
+  "title": "GrokInstall Agent",
+  "description": "Declares a Grok agent — its model, tools, and conversational behaviour.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "type": "string", "const": "grokinstall.dev/v1" },
+    "kind": { "type": "string", "const": "Agent" },
+    "metadata": { "$ref": "#/definitions/Metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["model"],
+      "additionalProperties": false,
+      "properties": {
+        "model": { "type": "string", "description": "Model identifier, e.g. `grok-4` or `grok-4-mini`." },
+        "description": { "type": "string" },
+        "instructions": { "type": "string", "description": "System prompt or instructions." },
+        "tools": { "type": "array", "items": { "type": "string" }, "description": "Tool names this agent may call." },
+        "memory": { "type": "string", "description": "Named memory store this agent attaches to." },
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "maxTokens": { "type": "integer", "minimum": 1 }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}$" },
+        "namespace": { "type": "string" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } },
+        "annotations": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

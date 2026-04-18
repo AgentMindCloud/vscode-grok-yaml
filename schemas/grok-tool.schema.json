@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/grok-tool.schema.json",
+  "title": "GrokInstall Tool",
+  "description": "Declares a tool (function, HTTP, or shell) that agents may invoke.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "type": "string", "const": "grokinstall.dev/v1" },
+    "kind": { "type": "string", "const": "Tool" },
+    "metadata": { "$ref": "#/definitions/Metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["function", "http", "shell", "mcp"] },
+        "entrypoint": { "type": "string" },
+        "endpoint": { "type": "string", "format": "uri" },
+        "parameters": {
+          "type": "object",
+          "description": "JSON Schema for the tool's call arguments.",
+          "additionalProperties": true
+        },
+        "returns": { "type": "object", "additionalProperties": true },
+        "sideEffects": { "type": "string", "enum": ["none", "read", "write"] }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}$" },
+        "namespace": { "type": "string" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } },
+        "annotations": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    }
+  }
+}

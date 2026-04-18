@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/grok-workflow.schema.json",
+  "title": "GrokInstall Workflow",
+  "description": "Declares a multi-step workflow composed of agents, tools, and control flow.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "additionalProperties": false,
+  "properties": {
+    "apiVersion": { "type": "string", "const": "grokinstall.dev/v1" },
+    "kind": { "type": "string", "const": "Workflow" },
+    "metadata": { "$ref": "#/definitions/Metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["steps"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" },
+        "inputs": { "type": "object", "additionalProperties": { "type": "string" } },
+        "outputs": { "type": "object", "additionalProperties": { "type": "string" } },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/Step" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,62}$" },
+        "namespace": { "type": "string" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } },
+        "annotations": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "agent": { "type": "string", "description": "Agent ref." },
+        "tool": { "type": "string", "description": "Tool ref." },
+        "run": { "type": "string", "description": "Inline shell or expression to run." },
+        "with": { "type": "object", "additionalProperties": true },
+        "if": { "type": "string" },
+        "needs": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

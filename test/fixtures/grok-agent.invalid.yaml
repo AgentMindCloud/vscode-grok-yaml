@@ -1,0 +1,8 @@
+apiVersion: grokinstall.dev/v1
+kind: Agent
+metadata:
+  name: demo-agent
+spec:
+  # `model` should be a string — the integer below triggers a schema diagnostic.
+  model: 42
+  temperature: 0.7
