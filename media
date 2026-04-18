@@ -1,8 +1,1 @@
-Target paths in the extension repo
-----------------------------------
-Place each file at the following path inside `vscode-grok-yaml/`:
-
-  vscode-grok-yaml/media/icon.png        (128x128, transparent background)
-  vscode-grok-yaml/media/icon-dark.png   (128x128, #0A0A0A background fallback)
-  vscode-grok-yaml/media/banner.png      (1376x400, Marketplace gallery banner)
 
