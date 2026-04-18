@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grokagents.dev/schemas/grok-agent.schema.json",
+  "title": "GrokInstall Agent Spec",
+  "description": "Top-level definition of a Grok agent's identity, persona, and runtime behavior.",
+  "type": "object",
+  "required": ["spec_version", "name", "persona"],
+  "additionalProperties": true,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "pattern": "^2\\.0\\.\\d+$",
+      "description": "GrokInstall spec version. Pin to 2.0.x."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Agent name. Shown in the Marketplace and on X."
+    },
+    "handle": {
+      "type": "string",
+      "pattern": "^@?[A-Za-z0-9_]{1,15}$",
+      "description": "Optional X handle the agent posts from."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "One-line summary. Shown on the install card."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "reply-bot",
+        "voice-companion",
+        "thread-orchestrator",
+        "trend-surfer",
+        "swarm-coordinator",
+        "other"
+      ]
+    },
+    "persona": {
+      "type": "object",
+      "required": ["voice", "temperament"],
+      "properties": {
+        "voice": { "type": "string" },
+        "temperament": { "type": "string" },
+        "guardrails": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "trend_pipeline": {
+      "type": "object",
+      "properties": {
+        "source": { "type": "string" },
+        "window_minutes": { "type": "integer", "minimum": 1 },
+        "max_posts_per_hour": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "thread_posting": {
+      "type": "object",
+      "properties": {
+        "max_posts": { "type": "integer", "minimum": 2, "maximum": 25 },
+        "cadence_seconds": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

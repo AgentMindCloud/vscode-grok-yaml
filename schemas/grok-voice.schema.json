@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grokagents.dev/schemas/grok-voice.schema.json",
+  "title": "GrokInstall Voice Spec",
+  "description": "Voice companion configuration.",
+  "type": "object",
+  "required": ["spec_version", "voice_profile"],
+  "additionalProperties": true,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "pattern": "^2\\.0\\.\\d+$"
+    },
+    "voice_profile": {
+      "type": "object",
+      "required": ["voice_id", "tone"],
+      "properties": {
+        "voice_id": {
+          "type": "string",
+          "description": "Provider-specific voice identifier."
+        },
+        "tone": {
+          "type": "string",
+          "enum": ["neutral", "warm", "confident", "playful", "deadpan"]
+        },
+        "rate": { "type": "number", "minimum": 0.5, "maximum": 2.0 },
+        "pitch": { "type": "number", "minimum": -1.0, "maximum": 1.0 }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "max_duration_seconds": { "type": "integer", "minimum": 1, "maximum": 120 },
+        "wake_phrases": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "fallback_text": { "type": "string" }
+      }
+    }
+  }
+}

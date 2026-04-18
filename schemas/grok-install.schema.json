@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grokagents.dev/schemas/grok-install.schema.json",
+  "title": "GrokInstall Install Manifest",
+  "description": "Install-time manifest pointing at the agent spec, runtime, and safety profile.",
+  "type": "object",
+  "required": ["spec_version", "agent", "runtime"],
+  "additionalProperties": true,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "pattern": "^2\\.0\\.\\d+$"
+    },
+    "agent": {
+      "type": "string",
+      "description": "Relative path to grok-agent.yaml"
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["platform"],
+      "properties": {
+        "platform": {
+          "type": "string",
+          "enum": ["x", "grok-cli", "grokagents.dev"]
+        },
+        "model": { "type": "string" },
+        "memory_mb": { "type": "integer", "minimum": 64 }
+      }
+    },
+    "safety": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "string",
+          "enum": ["strict", "standard", "relaxed"]
+        },
+        "rate_limits": {
+          "type": "object",
+          "properties": {
+            "posts_per_hour": { "type": "integer", "minimum": 0 },
+            "replies_per_hour": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "install_link": {
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

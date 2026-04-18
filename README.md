@@ -1,148 +1,106 @@
+# GrokInstall YAML
+
 ![GrokInstall extension banner](media/banner.png)
-<img width="128" height="128" alt="icon-dark" src="https://github.com/user-attachments/assets/d7fcef83-5bb0-43b8-b6f6-bca91afaeadb" />
-<img width="128" height="128" alt="icon" src="https://github.com/user-attachments/assets/fe1fcbb6-89b4-4c7b-9d64-d4a1c2490f5c" />
-<img width="1376" height="400" alt="banner" src="https://github.com/user-attachments/assets/699733ee-be7b-4851-9e9c-67f063bcdd32" />
 
-QUICK PATCH — vscode-grok-yaml: wire up brand icon and marketplace banner
+**YAML authoring, validation, safety scanning, and a template gallery for
+GrokInstall specs — right in VS Code. Built for Grok on X.**
 
-Context: Session 5 of the GrokInstall masterplan deferred the extension 
-icon and gallery banner. Claude Design has produced them and I've placed 
-four files into vscode-grok-yaml/media/:
+Go from empty folder to shipped agent without leaving the editor. Author
+`grok-agent.yaml`, `grok-install.yaml`, `grok-voice.yaml`, `grok-swarm.yaml`,
+and `capabilities.yaml` with schema-aware IntelliSense, inline
+diagnostics, safety scanning, and a glassmorphic template gallery.
 
-  media/icon.png        128×128, transparent bg, cyan brand mark
-  media/icon-dark.png   128×128, #0A0A0A bg, same mark (fallback)
-  media/banner.png      1376×400, marketplace gallery banner
-  media/README.md       documentation of these assets, locked hex values, 
-                        and iteration notes — keep this file, don't delete
+---
 
-Verify all four exist before doing anything else. If any are missing, 
-STOP and tell me which.
+## Screenshots
 
-Tasks:
+| | |
+| --- | --- |
+| ![IntelliSense](assets/screenshots/intellisense.png)<br />`TODO: IntelliSense completing a reply_to_mention key` | ![Hover docs](assets/screenshots/hover.png)<br />`TODO: Hover tooltip on voice_profile.tone` |
+| ![Safety scanner](assets/screenshots/scanner.png)<br />`TODO: Scanner flagging a rate-limit risk` | ![Gallery](assets/screenshots/gallery.png)<br />`TODO: Glassmorphic template gallery panel` |
 
-1. Open vscode-grok-yaml/package.json. Make these edits:
+> Assets marked `TODO` are dropped in by Claude Design before publish
+> (see `PUBLISH.md`).
 
-   a. Add or restore the "icon" field at top level:
-      "icon": "media/icon.png"
+---
 
-   b. Add or update the galleryBanner block at top level:
-      "galleryBanner": {
-        "color": "#0A0A0A",
-        "theme": "dark"
-      }
+## Features
 
-   Place both fields in standard VS Code extension manifest order: after 
-   displayName/description/version/publisher but before engines. If 
-   existing values differ, overwrite — these are correct per the locked 
-   brand documented in media/README.md.
+- **Schema-backed IntelliSense and diagnostics** for five Grok spec
+  formats, powered by the bundled `redhat.vscode-yaml` dependency.
+- **Five context-aware snippets** covering the most-used capabilities.
+- **Command palette** — eight commands covering init, validate, scan,
+  deploy, and share.
+- **Glassmorphic template gallery** — clone starter projects or drop a
+  snippet into the current file.
+- **Safety scanner integration** — runs `grok-install scan` with
+  severity-aware notifications and a streaming output log.
+- **One-click share** — deploy copies a ready-to-post X message with
+  your install link to the clipboard.
 
-2. Open vscode-grok-yaml/.vscodeignore. Confirm the media/ folder is NOT 
-   excluded. If you find any pattern that would exclude it (like 
-   "media/**", "*.png", or specific file exclusions), remove just those 
-   lines. The media/README.md is fine to ship inside the .vsix — it's 
-   small and provides context. If .vscodeignore doesn't exist, leave it 
-   alone — default behavior includes media/.
+---
 
-3. Open vscode-grok-yaml/README.md (the marketplace-facing one). Add 
-   directly under the title, if not already present:
-   
-   ![GrokInstall extension banner](media/banner.png)
+## Commands
 
-   If the README already references the banner with a different path, 
-   update it to media/banner.png exactly.
+Every command is prefixed `GrokInstall:` in the palette.
 
-4. Run a local sanity check:
-   - cd vscode-grok-yaml
-   - Read package.json scripts to find the build command (npm run compile, 
-     npm run build, or similar) and run it
-   - npx @vscode/vsce package --no-dependencies
-   - Confirm the command exits 0 and a .vsix file is produced
-   - Verify icon and banner are inside the .vsix:
-       npx @vscode/vsce ls > /tmp/vsix-contents.txt
-       grep -E "media/(icon|banner)" /tmp/vsix-contents.txt
-     Both files must appear.
-   - Delete /tmp/vsix-contents.txt and the .vsix afterward — throwaway.
+| Command                               | Suggested shortcut | What it does                                                         |
+| ------------------------------------- | ------------------ | -------------------------------------------------------------------- |
+| `New Agent from Template`             | `Cmd+Alt+N`        | Wizard (name + category) then runs `grok-install init` in a terminal |
+| `Validate Current Spec`               | `Cmd+Alt+V`        | Validates the active file, pushes diagnostics into Problems          |
+| `Validate Entire Project`             | `Cmd+Alt+Shift+V`  | Scans the full workspace with `grok-install validate --project`      |
+| `Run Safety Scanner`                  | `Cmd+Alt+S`        | Runs `grok-install scan` with progress notifications                 |
+| `Deploy Agent`                        | `Cmd+Alt+D`        | Deploys, copies a ready-to-post X share message                      |
+| `Copy Install Link`                   | `Cmd+Alt+L`        | Generates and copies the install link to clipboard                   |
+| `Open grokagents.dev Marketplace`     | —                  | Opens the public marketplace in your browser                         |
+| `Open Template Gallery`               | `Cmd+Alt+G`        | Opens the glassmorphic template gallery webview                      |
 
-5. If step 4 fails, STOP and report the exact error. Do not commit until 
-   packaging succeeds locally.
+Assign the shortcuts from `File > Preferences > Keyboard Shortcuts` —
+the suggestions above are not pre-bound to avoid stomping your setup.
 
-6. If step 4 passes, commit with this exact message:
-   chore(extension): wire up brand icon and marketplace banner
-   
-   - Re-enable icon field pointing to media/icon.png
-   - Add galleryBanner block with locked brand bg #0A0A0A
-   - Reference banner.png in marketplace README
-   - Verified .vsix packaging includes media assets
+---
 
-7. Bump version in package.json (e.g. 0.1.0 → 0.1.1). Add a CHANGELOG.md 
-   entry under a new [0.1.1] section:
-   
-   ### Added
-   - Brand-locked extension icon (media/icon.png)
-   - VS Code Marketplace gallery banner with dark theme
-   
-   Then commit the version bump separately:
-   chore: bump to 0.1.1
+## Snippets
 
-NO marketing pack needed — internal patch.
+Type any of the prefixes below inside a `.yaml` file. The snippet fills
+in schema-valid defaults with tab stops for quick customization.
 
-Output: the diff for package.json, the .vsix verification output 
-showing icon.png and banner.png present, and confirmation both commits 
-landed cleanly.
+| Prefix         | Expands into                            | Target file             |
+| -------------- | --------------------------------------- | ----------------------- |
+| `grok:reply`   | `capabilities.reply_to_mention` block   | `capabilities.yaml`     |
+| `grok:thread`  | `thread_posting` + `post_thread`        | `grok-agent.yaml`       |
+| `grok:voice`   | Full `voice_profile` + `response` block | `grok-voice.yaml`       |
+| `grok:trend`   | `trend_pipeline` + `post_thread` combo  | `grok-agent.yaml`       |
+| `grok:swarm`   | `orchestrator` + `agents` + `fallback`  | `grok-swarm.yaml`       |
 
-GrokInstall — VS Code Extension Media Assets (v1)
-===================================================
+---
 
-Target paths in the extension repo
-----------------------------------
-Place each file at the following path inside `vscode-grok-yaml/`:
+## Why GrokInstall?
 
-  vscode-grok-yaml/media/icon.png        (128x128, transparent background)
-  vscode-grok-yaml/media/icon-dark.png   (128x128, #0A0A0A background fallback)
-  vscode-grok-yaml/media/banner.png      (1376x400, Marketplace gallery banner)
+GrokInstall turns a YAML spec into a shippable Grok agent on X. The CLI
+handles validation, safety scanning, and deployment. This extension
+puts that entire loop inside your editor — author with IntelliSense,
+catch issues before `deploy`, and share an install link that lets
+anyone install your agent with a single click.
 
+The full stack is open and independent: the
+[core spec](https://github.com/AgentMindCloud/grok-install), the
+[YAML standards](https://github.com/AgentMindCloud/grok-yaml-standards),
+the [CLI](https://github.com/AgentMindCloud/grok-install-cli), and the
+[marketplace](https://grokagents.dev) all ship under the AgentMindCloud
+org. Build an agent once, publish it everywhere.
 
+---
 
+## Install
 
-Wire-up in package.json (reference, for Claude Code or manual edit):
+1. Install this extension from the VS Code Marketplace.
+2. Install the CLI: `npm install -g grok-install`.
+3. Open the command palette and run **GrokInstall: New Agent from Template**.
 
-  "icon": "media/icon.png",
-  "galleryBanner": {
-    "color": "#0A0A0A",
-    "theme": "dark"
-  }
+---
 
-And in the Marketplace-facing README.md, directly under the title:
+## Disclaimer
 
-  ![GrokInstall extension banner](media/banner.png)
-
-
-Locked brand hex values used in these assets
---------------------------------------------
-  Background (deep space black)     #0A0A0A
-  Primary neon (cyan)               #00F0FF
-  Success neon (green)              #00FF9D
-  Primary text                      #FFFFFF
-  Secondary text                    #E5E5E5
-  Tertiary text                     rgba(255, 255, 255, 0.5)
-  Surface (glass fills)             rgba(255, 255, 255, 0.04)
-  Border subtle                     rgba(0, 240, 255, 0.15)
-  Border focused                    rgba(0, 240, 255, 0.40)
-
-No other colors appear in these assets. No drop shadows. Neon glow only.
-
-
-Version
--------
-These are version 1 of the icon + banner pair.
-
-If you want to iterate — tighter crop, different headline, a seasonal
-variant, a larger or smaller mark, a lighter-weight editor mockup, etc. —
-just ask in the same Claude Design project ("Grok Install Eco System")
-so the saved GrokInstall design system stays calibrated. Starting a new
-project would re-bootstrap the tokens and risk drift.
-
-Legal
------
-GrokInstall is an independent community project. Not affiliated with
-xAI, Grok, or X.
+GrokInstall is an independent community project. **Not affiliated with
+xAI, Grok, or X.**

@@ -1,0 +1,172 @@
+{
+  "name": "grokinstall-yaml",
+  "displayName": "GrokInstall YAML",
+  "description": "YAML authoring, validation, safety scanning, and template gallery for GrokInstall specs. Built for Grok on X.",
+  "version": "0.2.0",
+  "publisher": "agentmindcloud",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#0A0A0A",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml/issues"
+  },
+  "homepage": "https://grokagents.dev",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "grok",
+    "grokinstall",
+    "yaml",
+    "agent",
+    "xai",
+    "ai-agents"
+  ],
+  "extensionDependencies": [
+    "redhat.vscode-yaml"
+  ],
+  "activationEvents": [
+    "onLanguage:yaml"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "grokinstall.init",
+        "title": "New Agent from Template",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokinstall.validate",
+        "title": "Validate Current Spec",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokinstall.validateProject",
+        "title": "Validate Entire Project",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokinstall.scanSafety",
+        "title": "Run Safety Scanner",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokinstall.deploy",
+        "title": "Deploy Agent",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokinstall.generateInstallLink",
+        "title": "Copy Install Link",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokinstall.openMarketplace",
+        "title": "Open grokagents.dev Marketplace",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokinstall.openTemplateGallery",
+        "title": "Open Template Gallery",
+        "category": "GrokInstall"
+      }
+    ],
+    "yamlValidation": [
+      {
+        "fileMatch": [
+          "grok-agent.yaml",
+          "grok-agent.yml",
+          "agent.yaml",
+          "agent.yml"
+        ],
+        "url": "./schemas/grok-agent.schema.json"
+      },
+      {
+        "fileMatch": [
+          "grok-install.yaml",
+          "grok-install.yml"
+        ],
+        "url": "./schemas/grok-install.schema.json"
+      },
+      {
+        "fileMatch": [
+          "grok-voice.yaml",
+          "grok-voice.yml"
+        ],
+        "url": "./schemas/grok-voice.schema.json"
+      },
+      {
+        "fileMatch": [
+          "grok-swarm.yaml",
+          "grok-swarm.yml"
+        ],
+        "url": "./schemas/grok-swarm.schema.json"
+      },
+      {
+        "fileMatch": [
+          "capabilities.yaml",
+          "capabilities.yml"
+        ],
+        "url": "./schemas/capabilities.schema.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "yaml",
+        "path": "./snippets/reply_to_mention.code-snippets"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/post_thread.code-snippets"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/voice_response.code-snippets"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/trend_to_thread.code-snippets"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/swarm_orchestrator.code-snippets"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --no-dependencies",
+    "publish:vsce": "vsce publish --no-dependencies",
+    "publish:ovsx": "ovsx publish --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^2.24.0",
+    "esbuild": "^0.20.1",
+    "ovsx": "^0.9.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
