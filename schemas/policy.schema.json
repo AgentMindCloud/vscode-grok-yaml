@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/policy.schema.json",
+  "title": "Grok Policy",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Policy" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["rules"],
+      "properties": {
+        "scope": {
+          "type": "array",
+          "items": { "enum": ["agent", "tool", "workflow", "model", "memory"] }
+        },
+        "rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "effect", "match"],
+            "properties": {
+              "id": { "type": "string" },
+              "effect": { "enum": ["allow", "deny", "redact"] },
+              "match": { "type": "object" },
+              "reason": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

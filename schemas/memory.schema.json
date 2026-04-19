@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/memory.schema.json",
+  "title": "Grok Memory",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Memory" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["buffer", "vector", "kv", "graph"] },
+        "backend": { "type": "string" },
+        "ttlSeconds": { "type": "integer", "minimum": 0 },
+        "maxItems": { "type": "integer", "minimum": 1 },
+        "embedModel": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

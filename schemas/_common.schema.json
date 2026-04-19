@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/common.schema.json",
+  "title": "Grok Common",
+  "description": "Shared sub-schemas used by all Grok specs.",
+  "definitions": {
+    "apiVersion": {
+      "type": "string",
+      "enum": ["grok.install/v1", "grok.install/v1alpha1", "grok.install/v1beta1"]
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,62}$",
+          "description": "DNS-1123 compatible identifier."
+        },
+        "description": { "type": "string" },
+        "labels": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

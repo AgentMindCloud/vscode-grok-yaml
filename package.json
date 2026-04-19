@@ -1,0 +1,199 @@
+{
+  "name": "grok-yaml",
+  "displayName": "GrokInstall YAML",
+  "description": "Authoring support for GrokInstall YAML specs: validation, IntelliSense, snippets, and scaffolding for agents, workflows, tools, prompts, memory, MCP servers, and more.",
+  "version": "0.1.0",
+  "publisher": "GrokInstall",
+  "license": "Apache-2.0",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#0A0A0A",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Snippets",
+    "Other"
+  ],
+  "keywords": [
+    "grok",
+    "grokinstall",
+    "yaml",
+    "agent",
+    "mcp",
+    "ai",
+    "llm"
+  ],
+  "homepage": "https://github.com/AgentMindCloud/vscode-grok-yaml#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml/issues"
+  },
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:yaml",
+    "onLanguage:grok-yaml",
+    "workspaceContains:**/*.grok.yaml",
+    "workspaceContains:**/*.grok.yml"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "grok-yaml",
+        "aliases": [
+          "Grok YAML",
+          "grok-yaml"
+        ],
+        "extensions": [
+          ".grok.yaml",
+          ".grok.yml"
+        ],
+        "filenamePatterns": [
+          "grok.yaml",
+          "grok.yml",
+          "agent.grok.yaml",
+          "workflow.grok.yaml"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "media/icon.png",
+          "dark": "media/icon.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "grok-yaml",
+        "scopeName": "source.yaml.grok",
+        "path": "./syntaxes/grok-yaml.tmLanguage.json"
+      }
+    ],
+    "yamlValidation": [
+      {
+        "fileMatch": ["*.agent.grok.yaml", "*.agent.grok.yml", "agent.yaml"],
+        "url": "./schemas/agent.schema.json"
+      },
+      {
+        "fileMatch": ["*.workflow.grok.yaml", "*.workflow.grok.yml", "workflow.yaml"],
+        "url": "./schemas/workflow.schema.json"
+      },
+      {
+        "fileMatch": ["*.tool.grok.yaml", "*.tool.grok.yml", "tool.yaml"],
+        "url": "./schemas/tool.schema.json"
+      },
+      {
+        "fileMatch": ["*.prompt.grok.yaml", "*.prompt.grok.yml", "prompt.yaml"],
+        "url": "./schemas/prompt.schema.json"
+      },
+      {
+        "fileMatch": ["*.model.grok.yaml", "*.model.grok.yml", "model.yaml"],
+        "url": "./schemas/model.schema.json"
+      },
+      {
+        "fileMatch": ["*.memory.grok.yaml", "*.memory.grok.yml", "memory.yaml"],
+        "url": "./schemas/memory.schema.json"
+      },
+      {
+        "fileMatch": ["*.mcp.grok.yaml", "*.mcp.grok.yml", "mcp.yaml", "mcp-server.yaml"],
+        "url": "./schemas/mcp-server.schema.json"
+      },
+      {
+        "fileMatch": ["*.task.grok.yaml", "*.task.grok.yml", "task.yaml"],
+        "url": "./schemas/task.schema.json"
+      },
+      {
+        "fileMatch": ["*.pipeline.grok.yaml", "*.pipeline.grok.yml", "pipeline.yaml"],
+        "url": "./schemas/pipeline.schema.json"
+      },
+      {
+        "fileMatch": ["*.policy.grok.yaml", "*.policy.grok.yml", "policy.yaml"],
+        "url": "./schemas/policy.schema.json"
+      },
+      {
+        "fileMatch": ["*.dataset.grok.yaml", "*.dataset.grok.yml", "dataset.yaml"],
+        "url": "./schemas/dataset.schema.json"
+      },
+      {
+        "fileMatch": ["*.eval.grok.yaml", "*.eval.grok.yml", "eval.yaml", "evaluation.yaml"],
+        "url": "./schemas/evaluation.schema.json"
+      },
+      {
+        "fileMatch": ["*.env.grok.yaml", "*.env.grok.yml", "environment.yaml"],
+        "url": "./schemas/environment.schema.json"
+      },
+      {
+        "fileMatch": ["*.deploy.grok.yaml", "*.deploy.grok.yml", "deployment.yaml"],
+        "url": "./schemas/deployment.schema.json"
+      }
+    ],
+    "jsonValidation": [
+      {
+        "fileMatch": "grokinstall.json",
+        "url": "./schemas/agent.schema.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "grok-yaml.validate",
+        "title": "Grok YAML: Validate Current File",
+        "category": "Grok YAML"
+      },
+      {
+        "command": "grok-yaml.scan",
+        "title": "Grok YAML: Scan Workspace for Grok Specs",
+        "category": "Grok YAML"
+      },
+      {
+        "command": "grok-yaml.generateAgent",
+        "title": "Grok YAML: Generate New Agent Spec",
+        "category": "Grok YAML"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "grok-yaml.validate",
+          "when": "resourceExtname =~ /\\.ya?ml$/"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Grok YAML",
+      "properties": {
+        "grokYaml.validation.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable in-editor validation of Grok YAML specs."
+        },
+        "grokYaml.scan.exclude": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["**/node_modules/**", "**/.git/**", "**/out/**", "**/dist/**"],
+          "description": "Glob patterns to exclude from workspace scans."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "tsc --noEmit -p ./",
+    "package": "vsce package --no-dependencies"
+  },
+  "extensionDependencies": [
+    "redhat.vscode-yaml"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}

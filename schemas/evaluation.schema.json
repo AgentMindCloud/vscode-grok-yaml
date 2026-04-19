@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/evaluation.schema.json",
+  "title": "Grok Evaluation",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Evaluation" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["target", "dataset", "metrics"],
+      "properties": {
+        "target": { "type": "string", "description": "Agent/Workflow ref under test." },
+        "dataset": { "type": "string", "description": "Dataset ref." },
+        "metrics": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "kind"],
+            "properties": {
+              "name": { "type": "string" },
+              "kind": { "enum": ["exact-match", "regex", "rubric", "llm-judge", "bleu", "rouge"] },
+              "params": { "type": "object" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "passThreshold": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

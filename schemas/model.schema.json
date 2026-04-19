@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/model.schema.json",
+  "title": "Grok Model",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Model" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["provider", "model"],
+      "properties": {
+        "provider": { "enum": ["xai", "anthropic", "openai", "google", "local", "ollama"] },
+        "model": { "type": "string" },
+        "endpoint": { "type": "string", "format": "uri" },
+        "apiKeyEnv": { "type": "string" },
+        "defaultParams": {
+          "type": "object",
+          "properties": {
+            "temperature": { "type": "number" },
+            "topP": { "type": "number" },
+            "maxTokens": { "type": "integer" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

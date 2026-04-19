@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/mcp-server.schema.json",
+  "title": "Grok MCP Server",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "MCPServer" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["transport"],
+      "properties": {
+        "transport": { "enum": ["stdio", "http", "sse"] },
+        "command": { "type": "string" },
+        "args": { "type": "array", "items": { "type": "string" } },
+        "url": { "type": "string", "format": "uri" },
+        "env": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": { "enum": ["tools", "resources", "prompts", "sampling"] }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/agent.schema.json",
+  "title": "Grok Agent",
+  "description": "Declarative spec for an agent.",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Agent" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["model", "systemPrompt"],
+      "properties": {
+        "model": { "type": "string", "description": "Model ID or reference." },
+        "systemPrompt": { "type": "string" },
+        "tools": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "memory": {
+          "type": "object",
+          "properties": {
+            "kind": { "enum": ["none", "short-term", "long-term", "hybrid"] },
+            "ref": { "type": "string" }
+          }
+        },
+        "maxTokens": { "type": "integer", "minimum": 1 },
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
