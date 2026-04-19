@@ -1,8 +1,3 @@
-![GrokInstall extension banner](media/banner.png)
-<img width="128" height="128" alt="icon-dark" src="https://github.com/user-attachments/assets/d7fcef83-5bb0-43b8-b6f6-bca91afaeadb" />
-<img width="128" height="128" alt="icon" src="https://github.com/user-attachments/assets/fe1fcbb6-89b4-4c7b-9d64-d4a1c2490f5c" />
-<img width="1376" height="400" alt="banner" src="https://github.com/user-attachments/assets/699733ee-be7b-4851-9e9c-67f063bcdd32" />
-
 QUICK PATCH — vscode-grok-yaml: wire up brand icon and marketplace banner
 
 Context: Session 5 of the GrokInstall masterplan deferred the extension 
