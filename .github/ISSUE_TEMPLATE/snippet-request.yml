@@ -1,0 +1,73 @@
+name: Snippet request
+description: Ask for (or propose) a new tab-stopped snippet.
+title: "[snippet]: "
+labels: ["snippet", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Snippets are the fastest PRs to merge — if you already have a
+        draft, open a PR directly and skip this form. Otherwise, fill
+        this in and someone will pick it up.
+
+  - type: input
+    id: name
+    attributes:
+      label: Snippet name
+      description: The human-readable name that shows up in the picker.
+      placeholder: "Workflow — retry with exponential backoff"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: catalog
+    attributes:
+      label: Which catalog?
+      options:
+        - grok-install.json
+        - grok-agent.json
+        - grok-config.json
+        - grok-workflow.json
+        - New catalog (justify below)
+    validations:
+      required: true
+
+  - type: input
+    id: prefixes
+    attributes:
+      label: Trigger prefixes (comma-separated)
+      description: Short keys the user types, e.g. `workflow-retry, retry-step`.
+      placeholder: "workflow-retry, retry-step"
+    validations:
+      required: true
+
+  - type: textarea
+    id: body
+    attributes:
+      label: Proposed YAML body
+      description: |
+        Drop the exact YAML you'd want produced, with `${n:placeholder}`
+        / `${n|enum,values|}` tab stops. If you're not sure about
+        VS Code snippet syntax, leave the placeholders in plain `<>` —
+        a maintainer will convert.
+      render: yaml
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is this worth a snippet?
+      description: What user pain does it remove? How often do you hit it?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: willing-to-pr
+    attributes:
+      label: Next step
+      options:
+        - label: I'm happy to open the PR myself.
+          required: false
+        - label: I'd like a maintainer to draft the PR.
+          required: false

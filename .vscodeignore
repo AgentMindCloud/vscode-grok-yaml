@@ -1,0 +1,42 @@
+# Files and folders excluded from the packaged .vsix.
+# Anything NOT listed here is included.
+
+# Source control / project tooling
+.git/**
+.github/**
+.gitignore
+.vscode/**
+.vscode-test/**
+.editorconfig
+
+# Build + editor tooling
+tsconfig.json
+*.tsbuildinfo
+*.map
+node_modules/**
+
+# Repository docs (kept out of .vsix; visible on GitHub)
+docs/**
+CONTRIBUTING.md
+SECURITY.md
+
+# Test / dev artefacts
+coverage/**
+**/*.test.*
+**/__tests__/**
+
+# Packaging output
+*.vsix
+package-lock.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Keep these (do NOT exclude):
+#   README.md
+#   CHANGELOG.md
+#   LICENSE
+#   package.json
+#   media/**
+#   snippets/**

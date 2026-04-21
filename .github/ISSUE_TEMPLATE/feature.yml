@@ -1,0 +1,59 @@
+name: Feature request
+description: Propose a new feature, enhancement, or UX improvement.
+title: "[feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea. Proposals are most likely to be accepted if
+        they're small, self-contained, and don't add runtime code — this
+        extension is intentionally a pure manifest + snippets package.
+
+        Requesting a new snippet? Use the
+        [snippet request form](./snippet-request.yml) instead.
+        Requesting a new schema mapping? That's a feature — stay here.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the user pain, not the solution.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would you like this to work? Sketch the UX.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you thought about and why you rejected them.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Schema mapping (yamlValidation)
+        - Snippets
+        - README / docs
+        - CI / release process
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: runtime
+    attributes:
+      label: Scope guarantee
+      description: We reject proposals that pull the extension out of pure-manifest territory.
+      options:
+        - label: This proposal does **not** require shipping runtime code (`main` entry, activation handlers, commands, views).
+          required: true

@@ -1,0 +1,177 @@
+{
+  "name": "grok-yaml",
+  "displayName": "Grok YAML",
+  "description": "Schema validation, autocomplete, and tab-stopped snippets for the 12 Grok YAML document types (install, agent, config, workflow, prompt, tool, policy, model, dataset, eval, deployment) targeting spec v2.14.",
+  "version": "0.1.0",
+  "publisher": "agentmindcloud",
+  "license": "Apache-2.0",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#0A0A0A",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "grok",
+    "yaml",
+    "schema",
+    "snippets",
+    "install",
+    "agent",
+    "workflow",
+    "ai",
+    "devtools"
+  ],
+  "homepage": "https://github.com/AgentMindCloud/vscode-grok-yaml#readme",
+  "bugs": {
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgentMindCloud/vscode-grok-yaml.git"
+  },
+  "extensionDependencies": [
+    "redhat.vscode-yaml"
+  ],
+  "contributes": {
+    "yamlValidation": [
+      {
+        "fileMatch": [
+          "**/*.install.yaml",
+          "**/*.install.yml",
+          "**/grok-install.yaml",
+          "**/grok-install.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/install.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.install.v2.14.yaml",
+          "**/*.install.v2.14.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/install-v2.14.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.agent.yaml",
+          "**/*.agent.yml",
+          "**/agents/*.yaml",
+          "**/agents/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/agent.json"
+      },
+      {
+        "fileMatch": [
+          "**/grok.config.yaml",
+          "**/grok.config.yml",
+          "**/.grokrc.yaml",
+          "**/.grokrc.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/config.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.workflow.yaml",
+          "**/*.workflow.yml",
+          "**/workflows/*.yaml",
+          "**/workflows/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/workflow.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.prompt.yaml",
+          "**/*.prompt.yml",
+          "**/prompts/*.yaml",
+          "**/prompts/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/prompt.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.tool.yaml",
+          "**/*.tool.yml",
+          "**/tools/*.yaml",
+          "**/tools/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/tool.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.policy.yaml",
+          "**/*.policy.yml",
+          "**/policies/*.yaml",
+          "**/policies/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/policy.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.model.yaml",
+          "**/*.model.yml",
+          "**/models/*.yaml",
+          "**/models/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/model.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.dataset.yaml",
+          "**/*.dataset.yml",
+          "**/datasets/*.yaml",
+          "**/datasets/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/dataset.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.eval.yaml",
+          "**/*.eval.yml",
+          "**/evals/*.yaml",
+          "**/evals/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/eval.json"
+      },
+      {
+        "fileMatch": [
+          "**/*.deployment.yaml",
+          "**/*.deployment.yml",
+          "**/deployments/*.yaml",
+          "**/deployments/*.yml"
+        ],
+        "url": "https://schemas.grokinstall.dev/v2.14/deployment.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "yaml",
+        "path": "./snippets/grok-install.json"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/grok-agent.json"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/grok-config.json"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/grok-workflow.json"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies"
+  },
+  "devDependencies": {}
+}
