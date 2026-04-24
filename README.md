@@ -25,13 +25,10 @@
   <img src="https://img.shields.io/badge/Built%20for%20Grok%20on%20X-00D5FF?style=for-the-badge&logo=x&logoColor=001018&labelColor=0A0D14" />
   <img src="https://img.shields.io/badge/Apache%202.0-9D4EDD?style=for-the-badge&logoColor=FFFFFF&labelColor=0A0D14" />
 </p>
-
 <p align="center">
   <img src="media/banner.png" alt="GrokInstall extension banner" width="760" />
 </p>
-
 ## ✦ Screenshots
-
 | | |
 | --- | --- |
 | ![IntelliSense](assets/screenshots/intellisense.png) | ![Hover docs](assets/screenshots/hover.png) |
