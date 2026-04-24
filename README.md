@@ -7,7 +7,6 @@
     alt="header"
   />
 </p>
-
 <h1 align="center">⚡ GrokInstall YAML for VS Code</h1>
 
 <p align="center">
