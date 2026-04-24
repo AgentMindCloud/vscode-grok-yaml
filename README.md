@@ -30,8 +30,6 @@
   <img src="media/banner.png" alt="GrokInstall extension banner" width="760" />
 </p>
 
----
-
 ## ✦ Screenshots
 
 | | |
