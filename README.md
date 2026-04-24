@@ -1,5 +1,13 @@
 <!-- NEON / CYBERPUNK REPO TEMPLATE · VSCODE-GROK-YAML -->
 
+<p align="center">
+  <img
+    src="https://capsule-render.vercel.app/api?type=waving&height=230&color=0:00E5FF,50:7C3AED,100:FF4FD8&text=GrokInstall%20YAML&fontSize=50&fontColor=EAF8FF&fontAlign=50&fontAlignY=38&desc=YAML%20Authoring%2C%20Validation%2C%20Safety%20Scans%20%E2%80%94%20Inside%20VS%20Code&descAlignY=62&descSize=17"
+    width="100%"
+    alt="header"
+  />
+</p>
+
 <h1 align="center">⚡ GrokInstall YAML for VS Code</h1>
 
 <p align="center">
@@ -17,10 +25,6 @@
   <img src="https://img.shields.io/badge/8%20Commands-FF4FD8?style=for-the-badge&logoColor=FFFFFF&labelColor=0A0D14" />
   <img src="https://img.shields.io/badge/Built%20for%20Grok%20on%20X-00D5FF?style=for-the-badge&logo=x&logoColor=001018&labelColor=0A0D14" />
   <img src="https://img.shields.io/badge/Apache%202.0-9D4EDD?style=for-the-badge&logoColor=FFFFFF&labelColor=0A0D14" />
-</p>
-
-<p align="center">
-  <img src="media/banner.png" alt="GrokInstall extension banner" width="760" />
 </p>
 
 ---
@@ -174,14 +178,6 @@
 </table>
 
 <p align="center"><sub>Live mockups. Zero external assets. Real screenshots drop in on v1.0 publish.</sub></p>
-- **Top-left:** IntelliSense completing a `reply_to_mention` key
-- **Top-right:** Hover tooltip on `voice_profile.tone`
-- **Bottom-left:** Scanner flagging a rate-limit risk
-- **Bottom-right:** Glassmorphic template gallery panel
-
-Assets marked as placeholders are dropped in by Claude Design before publish — see `PUBLISH.md`.
-
-</details>
 
 ## ✦ Features
 
@@ -256,14 +252,14 @@ Every command is prefixed `GrokInstall:` in the palette.
 
 | Command | Suggested shortcut | What it does |
 |---|---|---|
-| `New Agent from Template` | `Cmd+Alt+N` | Wizard (name + category) then runs `grok-install init` in a terminal |
-| `Validate Current Spec` | `Cmd+Alt+V` | Validates the active file, pushes diagnostics into Problems |
-| `Validate Entire Project` | `Cmd+Alt+Shift+V` | Scans the full workspace with `grok-install validate --project` |
-| `Run Safety Scanner` | `Cmd+Alt+S` | Runs `grok-install scan` with progress notifications |
-| `Deploy Agent` | `Cmd+Alt+D` | Deploys, copies a ready-to-post X share message |
-| `Copy Install Link` | `Cmd+Alt+L` | Generates and copies the install link to clipboard |
+| `New Agent from Template` | `Ctrl+Alt+N` | Wizard (name + category) then runs `grok-install init` in a terminal |
+| `Validate Current Spec` | `Ctrl+Alt+V` | Validates the active file, pushes diagnostics into Problems |
+| `Validate Entire Project` | `Ctrl+Alt+Shift+V` | Scans the full workspace with `grok-install validate --project` |
+| `Run Safety Scanner` | `Ctrl+Alt+S` | Runs `grok-install scan` with progress notifications |
+| `Deploy Agent` | `Ctrl+Alt+D` | Deploys, copies a ready-to-post X share message |
+| `Copy Install Link` | `Ctrl+Alt+L` | Generates and copies the install link to clipboard |
 | `Open grokagents.dev Marketplace` | — | Opens the public marketplace in your browser |
-| `Open Template Gallery` | `Cmd+Alt+G` | Opens the glassmorphic template gallery webview |
+| `Open Template Gallery` | `Ctrl+Alt+G` | Opens the glassmorphic template gallery webview |
 
 > Assign the shortcuts from `File > Preferences > Keyboard Shortcuts` — the suggestions above are not pre-bound to avoid stomping your setup.
 
