@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/deployment.schema.json",
+  "title": "Grok Deployment",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Deployment" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["target", "environment"],
+      "properties": {
+        "target": { "type": "string", "description": "Agent/Workflow/Pipeline ref." },
+        "environment": { "type": "string", "description": "Environment ref." },
+        "replicas": { "type": "integer", "minimum": 0 },
+        "strategy": { "enum": ["rolling", "recreate", "canary"] },
+        "autoscale": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "integer", "minimum": 0 },
+            "max": { "type": "integer", "minimum": 1 },
+            "targetCpuPercent": { "type": "integer", "minimum": 1, "maximum": 100 }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

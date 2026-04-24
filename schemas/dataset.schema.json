@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/dataset.schema.json",
+  "title": "Grok Dataset",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Dataset" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["source"],
+      "properties": {
+        "source": {
+          "type": "object",
+          "required": ["kind"],
+          "properties": {
+            "kind": { "enum": ["file", "http", "s3", "db", "hf"] },
+            "uri": { "type": "string" },
+            "format": { "enum": ["json", "jsonl", "csv", "parquet", "yaml"] }
+          }
+        },
+        "schema": { "type": "object" },
+        "splits": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

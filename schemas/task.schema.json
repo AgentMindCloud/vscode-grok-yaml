@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grokinstall.dev/schemas/task.schema.json",
+  "title": "Grok Task",
+  "type": "object",
+  "required": ["apiVersion", "kind", "metadata", "spec"],
+  "properties": {
+    "apiVersion": { "$ref": "./_common.schema.json#/definitions/apiVersion" },
+    "kind": { "const": "Task" },
+    "metadata": { "$ref": "./_common.schema.json#/definitions/metadata" },
+    "spec": {
+      "type": "object",
+      "required": ["agent", "goal"],
+      "properties": {
+        "agent": { "type": "string", "description": "Agent ref." },
+        "goal": { "type": "string" },
+        "inputs": { "type": "object" },
+        "deadline": { "type": "string", "format": "date-time" },
+        "priority": { "enum": ["low", "normal", "high"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
