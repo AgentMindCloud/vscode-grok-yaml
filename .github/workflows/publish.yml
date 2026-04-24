@@ -1,0 +1,42 @@
+name: Package VSIX
+
+# Manual-only. This workflow produces a .vsix artifact for maintainers
+# to download and publish themselves. No tokens are used here.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Optional version override (leave blank to use package.json)'
+        required: false
+        type: string
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Override version (if provided)
+        if: ${{ inputs.version != '' }}
+        run: npm version --no-git-tag-version ${{ inputs.version }}
+
+      - name: Compile
+        run: npm run compile
+
+      - name: Package
+        run: npx @vscode/vsce package --no-dependencies
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grokinstall-yaml-vsix
+          path: '*.vsix'
+          if-no-files-found: error

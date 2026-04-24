@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grokagents.dev/schemas/capabilities.schema.json",
+  "title": "GrokInstall Capabilities Spec",
+  "description": "Per-capability configuration (reply_to_mention, post_thread, trend_to_thread, etc).",
+  "type": "object",
+  "required": ["spec_version", "capabilities"],
+  "additionalProperties": true,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "pattern": "^2\\.0\\.\\d+$"
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "reply_to_mention": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "max_replies_per_hour": { "type": "integer", "minimum": 0 },
+            "cooldown_seconds": { "type": "integer", "minimum": 0 },
+            "tone": { "type": "string" }
+          }
+        },
+        "post_thread": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "max_posts": { "type": "integer", "minimum": 2, "maximum": 25 }
+          }
+        },
+        "trend_to_thread": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "source": { "type": "string" },
+            "window_minutes": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "voice_response": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "voice_spec": { "type": "string" }
+          }
+        },
+        "swarm_delegate": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "swarm_spec": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

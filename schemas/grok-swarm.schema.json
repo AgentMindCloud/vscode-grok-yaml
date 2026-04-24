@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://grokagents.dev/schemas/grok-swarm.schema.json",
+  "title": "GrokInstall Swarm Orchestrator Spec",
+  "description": "Multi-agent orchestration config.",
+  "type": "object",
+  "required": ["spec_version", "orchestrator", "agents"],
+  "additionalProperties": true,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "pattern": "^2\\.0\\.\\d+$"
+    },
+    "orchestrator": {
+      "type": "object",
+      "required": ["strategy"],
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": ["round-robin", "leader-follower", "consensus", "router"]
+        },
+        "max_concurrent": { "type": "integer", "minimum": 1 },
+        "timeout_seconds": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "agents": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "role", "spec"],
+        "properties": {
+          "id": { "type": "string" },
+          "role": { "type": "string" },
+          "spec": { "type": "string", "description": "Path to agent YAML." },
+          "weight": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "fallback": {
+      "type": "object",
+      "properties": {
+        "agent_id": { "type": "string" },
+        "message": { "type": "string" }
+      }
+    }
+  }
+}
