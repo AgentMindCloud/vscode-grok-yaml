@@ -1,8 +1,7 @@
 <!-- NEON / CYBERPUNK REPO TEMPLATE · VSCODE-GROK-YAML -->
 
 <p align="center">
-  <img
-    src="https://capsule-render.vercel.app/api?type=waving&height=230&color=0:00E5FF,50:7C3AED,100:FF4FD8&text=GrokInstall%20YAML&fontSize=50&fontColor=EAF8FF&fontAlign=50&fontAlignY=38&desc=YAML%20Authoring%2C%20Validation%2C%20Safety%20Scans%20%E2%80%94%20Inside%20VS%20Code&descAlignY=62&descSize=17"
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=230&color=0:00E5FF,50:7C3AED,100:FF4FD8&text=GrokInstall%20YAML&fontSize=50&fontColor=EAF8FF&fontAlign=50&fontAlignY=38&desc=YAML%20Authoring%2C%20Validation%2C%20Safety%20Scans%20%E2%80%94%20Inside%20VS%20Code&descAlignY=62&descSize=17"
     width="100%"
     alt="header"
   />
