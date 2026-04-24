@@ -6,11 +6,15 @@
 
 ## Install
 
-From the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=AgentMindCloud.vscode-grok-yaml), or from the command line:
+> **Coming soon.** The `0.1.0` scaffold has not been published to the Marketplace yet.
+
+Once the listing is live, the extension will be installable via the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=AgentMindCloud.vscode-grok-yaml) or from the command line:
 
 ```
 code --install-extension AgentMindCloud.vscode-grok-yaml
 ```
+
+For now, build a local VSIX from source — see [Development](#development).
 
 ## Features
 
