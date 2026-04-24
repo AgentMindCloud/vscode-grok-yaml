@@ -174,8 +174,6 @@
 </table>
 
 <p align="center"><sub>Live mockups. Zero external assets. Real screenshots drop in on v1.0 publish.</sub></p>
-<summary><b>Screenshot captions</b></summary>
-
 - **Top-left:** IntelliSense completing a `reply_to_mention` key
 - **Top-right:** Hover tooltip on `voice_profile.tone`
 - **Bottom-left:** Scanner flagging a rate-limit risk
