@@ -4,6 +4,14 @@
 
 > Built for Grok on X.
 
+## Install
+
+From the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=AgentMindCloud.vscode-grok-yaml), or from the command line:
+
+```
+code --install-extension AgentMindCloud.vscode-grok-yaml
+```
+
 ## Features
 
 - **Full IntelliSense** for every YAML spec published in [`grok-yaml-standards`](https://github.com/AgentMindCloud/grok-yaml-standards) — hover docs, autocomplete, and inline validation.
@@ -17,6 +25,10 @@
 The extension registers a schema contributor with [`redhat.vscode-yaml`](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), so full YAML language-server features apply to every GrokInstall document. File classification combines a fast glob pass (`**/grok-*.yaml`, `**/.grok/**/*.yaml`) with an optional content sniff that reads `apiVersion: grokinstall.dev/v1` and the `kind:` field so renamed files still validate.
 
 For safety findings, the extension runs the `grok-install` CLI with `--json` output on every change (debounced 400 ms by default) and maps each finding to a `vscode.Diagnostic`. If the CLI is not on PATH, the extension falls back to the bundled scanner library from `grok-install-cli`.
+
+## Bundled schemas
+
+All twelve `grok-yaml-standards` specs ship inside the VSIX: `Agent`, `Workflow`, `Tool`, `Prompt`, `Model`, `Dataset`, `Eval`, `Deploy`, `Secret`, `Policy`, `Telemetry`, `Install`. File patterns and the full registry manifest live in [`schemas/index.json`](./schemas/index.json).
 
 ## Commands
 
@@ -47,6 +59,20 @@ Status-bar colors are contributed as `grokYaml.statusClean`, `grokYaml.statusSca
 - Node.js 20 or later (for building from source)
 - `redhat.vscode-yaml` (installed automatically as an extension dependency)
 - Optionally, `grok-install` on PATH for the sharpest scanner results
+
+## Development
+
+```
+npm install
+npm run build      # esbuild → dist/extension.js
+npm run watch      # rebuild on change
+npm run typecheck  # tsc --noEmit
+npm run lint       # eslint src
+npm test           # compile + @vscode/test-electron
+npm run package    # vsce package → .vsix
+```
+
+CI runs `typecheck`, `lint`, and `test` on every push via [`.github/workflows/ci.yml`](./.github/workflows/ci.yml); tagged releases publish via [`.github/workflows/release.yml`](./.github/workflows/release.yml).
 
 ## Disclaimer
 
