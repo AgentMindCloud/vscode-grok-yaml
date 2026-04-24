@@ -1,0 +1,16 @@
+# GitHub Sponsors / third-party funding config.
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+github: [AgentMindCloud]
+# patreon:          # e.g. the-project
+# open_collective:  # e.g. the-project
+# ko_fi:            # e.g. the-project
+# tidelift:         # e.g. npm/the-project
+# community_bridge: # e.g. cloud-native-computing-foundation
+# liberapay:        # e.g. the-project
+# issuehunt:        # e.g. the-project
+# lfx_crowdfunding: # e.g. cloud-foundry
+# polar:            # e.g. the-project
+# buy_me_a_coffee:  # e.g. the-project
+# thanks_dev:       # e.g. the-project
+# custom:           # e.g. ['https://example.com/donate']

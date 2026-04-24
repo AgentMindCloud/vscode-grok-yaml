@@ -1,0 +1,101 @@
+name: Bug report
+description: Something in the extension is broken or behaving unexpectedly.
+title: "[bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. Please fill in every
+        field — missing repro steps are the #1 reason a bug sits in triage.
+
+        **Security issue?** Don't post it here. See
+        [SECURITY.md](../SECURITY.md).
+
+  - type: input
+    id: extension-version
+    attributes:
+      label: Extension version
+      description: From the Extensions pane, or `package.json` → `version`.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: vscode-version
+    attributes:
+      label: VS Code version
+      description: Help → About → Version.
+      placeholder: "1.95.0"
+    validations:
+      required: true
+
+  - type: input
+    id: yaml-ext-version
+    attributes:
+      label: Red Hat YAML extension version
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS
+        - Linux
+        - Windows
+        - Other (describe in steps)
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, numbered steps. Include a sample YAML if relevant.
+      placeholder: |
+        1. Create `foo.install.yaml` with the content below.
+        2. Observe ...
+
+        ```yaml
+        apiVersion: grokinstall.dev/v2.14
+        kind: Install
+        # ...
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output / logs
+      description: From "Output → YAML" or "Output → Grok YAML" if applicable.
+      render: shell
+
+  - type: checkboxes
+    id: prechecks
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true
+        - label: I have the Red Hat YAML extension installed and enabled.
+          required: true
+        - label: I am on the latest version of the Grok YAML extension.
+          required: false
