@@ -72,7 +72,7 @@ npm test           # compile + @vscode/test-electron
 npm run package    # vsce package → .vsix
 ```
 
-CI runs `typecheck`, `lint`, and `test` on every push via [`.github/workflows/ci.yml`](./.github/workflows/ci.yml); tagged releases publish via [`.github/workflows/release.yml`](./.github/workflows/release.yml).
+CI runs `typecheck`, `lint`, `build`, and `package` on every push via [`.github/workflows/ci.yml`](./.github/workflows/ci.yml), uploading the resulting `.vsix` as a build artifact. Tagged releases (`v*`) publish to the VS Code Marketplace and [Open VSX](https://open-vsx.org/) via [`.github/workflows/release.yml`](./.github/workflows/release.yml).
 
 ## Disclaimer
 
