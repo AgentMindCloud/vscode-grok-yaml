@@ -24,7 +24,7 @@ code --install-extension AgentMindCloud.vscode-grok-yaml
 
 The extension registers a schema contributor with [`redhat.vscode-yaml`](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml), so full YAML language-server features apply to every GrokInstall document. File classification combines a fast glob pass (`**/grok-*.yaml`, `**/.grok/**/*.yaml`) with an optional content sniff that reads `apiVersion: grokinstall.dev/v1` and the `kind:` field so renamed files still validate.
 
-For safety findings, the extension runs the `grok-install` CLI with `--json` output on every change (debounced 400 ms by default) and maps each finding to a `vscode.Diagnostic`. If the CLI is not on PATH, the extension falls back to the bundled scanner library from `grok-install-cli`.
+For safety findings, the extension runs the `grok-install` CLI with `--json` output on every change (debounced 400 ms by default) and maps each finding to a `vscode.Diagnostic`. If the CLI is not on PATH, the status bar shows `error` and diagnostics stay empty until the CLI is installed.
 
 ## Bundled schemas
 
@@ -44,7 +44,7 @@ See `grokYaml.*` in the Settings UI. Highlights:
 
 - `grokYaml.schemas.source` — `bundled` | `remote` | `auto` (default).
 - `grokYaml.schemas.remoteBaseUrl` — override the `grok-yaml-standards` base URL used by `auto` / `remote`.
-- `grokYaml.scanner.mode` — `cli` | `library` | `auto` (default).
+- `grokYaml.scanner.mode` — `cli` | `auto` (default).
 - `grokYaml.scanner.cliPath` — path or command for the `grok-install` CLI (default `grok-install`).
 - `grokYaml.scanner.runOn` — `change` (default) | `save`.
 - `grokYaml.scanner.debounceMs` — debounce for change-driven scans in ms (default `400`).

@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import type { ScanResult } from './types';
 
 export interface ScannerAdapter {
-  readonly id: 'cli' | 'library';
+  readonly id: 'cli';
   readonly displayName: string;
   scan(files?: string[], token?: vscode.CancellationToken): Promise<ScanResult>;
   isAvailable(): Promise<boolean>;

@@ -5,9 +5,15 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      OVSX_PAT: ${{ secrets.OVSX_PAT }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,11 +25,7 @@ jobs:
       - run: npm run build
       - name: Publish to Visual Studio Marketplace
         if: ${{ env.VSCE_PAT != '' }}
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_PAT }}
         run: npx vsce publish --no-dependencies -p "$VSCE_PAT"
       - name: Publish to Open VSX
         if: ${{ env.OVSX_PAT != '' }}
-        env:
-          OVSX_PAT: ${{ secrets.OVSX_PAT }}
         run: npx ovsx publish --no-dependencies -p "$OVSX_PAT"

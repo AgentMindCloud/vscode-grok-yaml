@@ -114,11 +114,10 @@
         },
         "grokYaml.scanner.mode": {
           "type": "string",
-          "enum": ["cli", "library", "auto"],
+          "enum": ["cli", "auto"],
           "enumDescriptions": [
             "Always spawn the grok-install CLI as a subprocess.",
-            "Always use the bundled grok-install-cli scanner library.",
-            "Prefer the CLI; fall back to the library if the CLI is unavailable."
+            "Use the CLI when it is on PATH; otherwise report no diagnostics."
           ],
           "default": "auto"
         },
