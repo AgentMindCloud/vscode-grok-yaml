@@ -99,7 +99,11 @@
       "properties": {
         "grokYaml.schemas.source": {
           "type": "string",
-          "enum": ["bundled", "remote", "auto"],
+          "enum": [
+            "bundled",
+            "remote",
+            "auto"
+          ],
           "enumDescriptions": [
             "Use only the schemas shipped inside the extension VSIX.",
             "Fetch the schemas from the remote grok-yaml-standards repository.",
@@ -114,7 +118,10 @@
         },
         "grokYaml.scanner.mode": {
           "type": "string",
-          "enum": ["cli", "auto"],
+          "enum": [
+            "cli",
+            "auto"
+          ],
           "enumDescriptions": [
             "Always spawn the grok-install CLI as a subprocess.",
             "Use the CLI when it is on PATH; otherwise report no diagnostics."
@@ -128,7 +135,10 @@
         },
         "grokYaml.scanner.runOn": {
           "type": "string",
-          "enum": ["change", "save"],
+          "enum": [
+            "change",
+            "save"
+          ],
           "enumDescriptions": [
             "Re-scan the document while the user is typing (debounced).",
             "Re-scan only when the document is saved."
@@ -144,7 +154,9 @@
         },
         "grokYaml.fileMatch.globs": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "default": [
             "**/grok-*.yaml",
             "**/grok-*.yml",
@@ -182,10 +194,10 @@
     "@typescript-eslint/eslint-plugin": "8.11.0",
     "@typescript-eslint/parser": "8.11.0",
     "@vscode/test-electron": "2.4.1",
-    "@vscode/vsce": "3.2.1",
-    "esbuild": "0.24.0",
+    "@vscode/vsce": "3.9.1",
+    "esbuild": "0.28.0",
     "eslint": "8.57.1",
-    "mocha": "10.7.3",
+    "mocha": "11.7.5",
     "prettier": "3.3.3",
     "typescript": "5.6.3"
   }
