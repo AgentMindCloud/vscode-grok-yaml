@@ -42,10 +42,23 @@
   ],
   "activationEvents": [
     "onLanguage:yaml",
+    "onLanguage:grok-yaml",
     "workspaceContains:**/grok-*.yaml",
     "workspaceContains:**/grok-*.yml",
     "workspaceContains:**/.grok/**/*.yaml",
-    "workspaceContains:**/.grok/**/*.yml"
+    "workspaceContains:**/.grok/**/*.yml",
+    "workspaceContains:**/.grok-install.yaml",
+    "onCommand:grokYaml.showOutput",
+    "onCommand:grokYaml.rescan",
+    "onCommand:grokYaml.refreshSchemas",
+    "onCommand:grokYaml.initAgent",
+    "onCommand:grokYaml.validateCurrent",
+    "onCommand:grokYaml.validateProject",
+    "onCommand:grokYaml.scanSafety",
+    "onCommand:grokYaml.deploy",
+    "onCommand:grokYaml.generateInstallLink",
+    "onCommand:grokYaml.openMarketplace",
+    "onCommand:grokYaml.openTemplateGallery"
   ],
   "contributes": {
     "commands": [
@@ -63,6 +76,109 @@
         "command": "grokYaml.refreshSchemas",
         "title": "Refresh Schemas from Remote",
         "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.initAgent",
+        "title": "Init Grok Agent",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.validateCurrent",
+        "title": "Validate Current Document",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.validateProject",
+        "title": "Validate Project",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.scanSafety",
+        "title": "Scan Safety",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.deploy",
+        "title": "Deploy Agent",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.generateInstallLink",
+        "title": "Generate Install Link",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.openMarketplace",
+        "title": "Open Grok Marketplace",
+        "category": "GrokInstall"
+      },
+      {
+        "command": "grokYaml.openTemplateGallery",
+        "title": "Open Template Gallery",
+        "category": "GrokInstall"
+      }
+    ],
+    "languages": [
+      {
+        "id": "grok-yaml",
+        "aliases": [
+          "GrokInstall YAML",
+          "grok-yaml"
+        ],
+        "extensions": [],
+        "filenamePatterns": [
+          "**/grok-*.yaml",
+          "**/grok-*.yml",
+          "**/.grok/**/*.yaml",
+          "**/.grok/**/*.yml",
+          "**/.grok-install.yaml"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "grok-yaml",
+        "scopeName": "source.yaml.grok",
+        "path": "./syntaxes/grok-yaml.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/grok-agent.json"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/grok-config.json"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/grok-install.json"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/grok-workflow.json"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/post_thread.code-snippets"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/reply_to_mention.code-snippets"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/swarm_orchestrator.code-snippets"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/trend_to_thread.code-snippets"
+      },
+      {
+        "language": "grok-yaml",
+        "path": "./snippets/voice_response.code-snippets"
       }
     ],
     "colors": [

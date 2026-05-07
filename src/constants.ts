@@ -21,6 +21,14 @@ export const COMMANDS = {
   showOutput: 'grokYaml.showOutput',
   rescan: 'grokYaml.rescan',
   refreshSchemas: 'grokYaml.refreshSchemas',
+  initAgent: 'grokYaml.initAgent',
+  validateCurrent: 'grokYaml.validateCurrent',
+  validateProject: 'grokYaml.validateProject',
+  scanSafety: 'grokYaml.scanSafety',
+  deploy: 'grokYaml.deploy',
+  generateInstallLink: 'grokYaml.generateInstallLink',
+  openMarketplace: 'grokYaml.openMarketplace',
+  openTemplateGallery: 'grokYaml.openTemplateGallery',
 } as const;
 
 export const STATUS_BAR_COLORS = {
