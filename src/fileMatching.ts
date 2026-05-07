@@ -103,6 +103,6 @@ export function resolveDescriptor(
 }
 
 export function isGrokYamlDocument(doc: vscode.TextDocument, descriptors: SchemaDescriptor[]): boolean {
-  if (doc.languageId !== 'yaml') return false;
+  if (doc.languageId !== 'yaml' && doc.languageId !== 'grok-yaml') return false;
   return resolveDescriptor(doc.uri, doc.getText(), descriptors) !== undefined;
 }

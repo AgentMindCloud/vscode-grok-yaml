@@ -46,7 +46,7 @@ export async function activate(ctx: vscode.ExtensionContext): Promise<void> {
 
   ctx.subscriptions.push(
     vscode.languages.registerCodeActionsProvider(
-      { language: 'yaml' },
+      [{ language: 'yaml' }, { language: 'grok-yaml' }],
       new ScannerCodeActionProvider(),
       { providedCodeActionKinds: ScannerCodeActionProvider.providedKinds },
     ),
@@ -152,7 +152,7 @@ function buildDebounced(runtime: RuntimeState, waitMs: number): ReturnType<typeo
 }
 
 function isTargetDocument(doc: vscode.TextDocument): boolean {
-  if (doc.languageId !== 'yaml') return false;
+  if (doc.languageId !== 'yaml' && doc.languageId !== 'grok-yaml') return false;
   if (doc.uri.scheme !== 'file') return false;
   return isGrokYamlDocument(doc, getDescriptors());
 }
