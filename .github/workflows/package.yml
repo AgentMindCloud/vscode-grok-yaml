@@ -23,6 +23,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Validate JSON files
         run: |
@@ -36,11 +40,15 @@ jobs:
             "
           done
 
-      - name: Verify yamlValidation schema count is 12
+      - name: Verify contributes.commands count
         run: |
-          COUNT=$(node -e "console.log(require('./package.json').contributes.yamlValidation.length)")
-          echo "yamlValidation entries: $COUNT"
-          test "$COUNT" = "12"
+          set -eu
+          COUNT=$(node -e "const p=require('./package.json'); console.log((p.contributes.commands||[]).length)")
+          echo "commands declared: $COUNT"
+          test "$COUNT" -ge "11"
+
+      - name: Build extension bundle
+        run: npm run build
 
       - name: Package extension
         run: npx --yes @vscode/vsce@latest package --no-dependencies

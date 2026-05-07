@@ -28,8 +28,8 @@ jobs:
         if: ${{ inputs.version != '' }}
         run: npm version --no-git-tag-version ${{ inputs.version }}
 
-      - name: Compile
-        run: npm run compile
+      - name: Build
+        run: npm run build
 
       - name: Package
         run: npx @vscode/vsce package --no-dependencies
