@@ -14,3 +14,9 @@ tsconfig.json
 !dist/extension.js
 .github/**
 package-lock.json
+AUDIT-REPORT.md
+MERGE_PLAN.md
+PUBLISH.md
+vsc-extension-quickstart.md
+docs/**
+CONTRIBUTING.md
